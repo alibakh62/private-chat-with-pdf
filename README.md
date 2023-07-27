@@ -11,8 +11,10 @@ The easiest way to get it up and running is to use the `docker run ...` command.
 For this example, we're going to use the **Falcon 7B** model. But, you can use any other model supported by the **Text Generation Inference** tool. Here's the docker command for inferencing with the **Falcon 7B** model:
 
 ```bash
-docker run --platform linux/amd64 --gpus all --shm-size 1g -p 8080:80 -v $PWD/data:/data ghcr.io/huggingface/text-generation-inference:0.9.1 --model-id OpenAssistant/falcon-7b-sft-top1-696 --num-shard 1
+docker run --platform linux/amd64 --gpus all --shm-size 1g -p 8080:80 -v $PWD/data:/data -e HF_HUB_ENABLE_HF_TRANSFER=1  ghcr.io/huggingface/text-generation-inference:0.9.1 --model-id OpenAssistant/falcon-7b-sft-top1-696 --num-shard 1
 ```
+
+**Note:** In case you face problems downloading the model, try turning `hf_transfer` off by setting `HF_HUB_ENABLE_HF_TRANSFER=0`.
 
 **Note:** In case you are using Apple Silicon Mx chips, you need to use the `--platform linux/amd64` flag to run the container.
 
